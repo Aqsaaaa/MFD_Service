@@ -1,9 +1,36 @@
 const db = require('./db');
+const fetch = require('node-fetch');
+
 
 const resolvers = {
   getMembership: async ({ id }) => {
     const [rows] = await db.query('SELECT * FROM memberships WHERE id = ?', [id]);
-    return rows[0];
+    if (rows.length === 0) return null;
+    const membership = rows[0];
+    try {
+      const response = await fetch(`http://localhost:4003/graphql`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query: `
+            query GetUser($id: ID!) {
+              getUser(id: $id) {
+                id
+                name
+                email
+              }
+            }
+          `,
+          variables: { id: membership.user_id }
+        }),
+      });
+      const json = await response.json();
+      membership.user = json.data.getUser;
+    }
+    catch (error) {
+      membership.user = null;
+    }
+    return membership;
   },
 
   getAllMemberships: async () => {

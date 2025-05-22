@@ -30,7 +30,6 @@ const resolvers = {
     } catch (error) {
       delivery.order = null;
     }
-
     return delivery;
   },
 

@@ -11,7 +11,7 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true,
 }));
 
-const PORT = 4007;
+const PORT = 4003;
 app.listen(PORT, () => {
   console.log(`Vendor Requests service running on port ${PORT}`);
 });

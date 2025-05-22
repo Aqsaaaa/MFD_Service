@@ -11,7 +11,7 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true,
 }));
 
-const PORT = 4003;
+const PORT = 4002;
 app.listen(PORT, () => {
   console.log(`Memberships service running on port ${PORT}`);
 });
