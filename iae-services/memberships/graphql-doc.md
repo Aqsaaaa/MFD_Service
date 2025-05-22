@@ -1,33 +1,48 @@
 # Memberships Service - GraphQL API Documentation
 
-## Types
-
-### Membership
-- **id**: ID! - Unique identifier for the membership
-- **user_id**: Int! - Associated user ID
-- **points**: Int - Membership points
-
-## Queries
-
-- **getMembership(id: ID!): Membership**  
-  Retrieve a membership by its ID.
-
-- **getAllMemberships: [Membership]**  
-  Retrieve all memberships.
-
 ## Mutations
 
-- **createMembership(input: MembershipInput!): Membership**  
-  Create a new membership record.
+- createMembership(input: MembershipInput!): Membership  
+  Create a new membership record.  
+  Example mutation:
+  ```
+  mutation {
+    createMembership(input: {
+      user_id: 1,
+      points: 100
+    }) {
+      id
+      user_id
+      points
+    }
+  }
+  ```
 
-- **updateMembership(id: ID!, input: MembershipInput!): Membership**  
-  Update an existing membership record.
+- updateMembership(id: ID!, input: MembershipInput!): Membership  
+  Update an existing membership record.  
+  Example mutation:
+  ```
+  mutation {
+    updateMembership(id: 1, input: {
+      points: 150
+    }) {
+      id
+      points
+    }
+  }
+  ```
 
-- **deleteMembership(id: ID!): Boolean**  
-  Delete a membership record by ID.
+- deleteMembership(id: ID!): Boolean  
+  Delete a membership record by ID.  
+  Example mutation:
+  ```
+  mutation {
+    deleteMembership(id: 1)
+  }
+  ```
 
 ## Input Types
 
-### MembershipInput
-- **user_id**: Int!
-- **points**: Int
+MembershipInput:
+- user_id: Int!
+- points: Int

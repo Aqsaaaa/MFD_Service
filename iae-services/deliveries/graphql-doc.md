@@ -1,37 +1,56 @@
 # Deliveries Service - GraphQL API Documentation
 
-## Types
-
-### Delivery
-- **id**: ID! - Unique identifier for the delivery
-- **order_id**: Int! - Associated order ID
-- **delivery_status**: String! - Status of the delivery (assigned, on the way, delivered)
-- **delivery_time**: String - DateTime when the delivery was made
-- **current_location**: String - Current location of the delivery
-
-## Queries
-
-- **getDelivery(id: ID!): Delivery**  
-  Retrieve a delivery by its ID.
-
-- **getAllDeliveries: [Delivery]**  
-  Retrieve all deliveries.
-
 ## Mutations
 
-- **createDelivery(input: DeliveryInput!): Delivery**  
-  Create a new delivery record.
+- createDelivery(input: DeliveryInput!): Delivery  
+  Create a new delivery record.  
+  Example mutation:
+  ```
+  mutation {
+    createDelivery(input: {
+      order_id: 1,
+      delivery_status: "assigned",
+      delivery_time: "2025-05-22T14:00:00Z",
+      current_location: "Warehouse"
+    }) {
+      id
+      order_id
+      delivery_status
+      delivery_time
+      current_location
+    }
+  }
+  ```
 
-- **updateDelivery(id: ID!, input: DeliveryInput!): Delivery**  
-  Update an existing delivery record.
+- updateDelivery(id: ID!, input: DeliveryInput!): Delivery  
+  Update an existing delivery record.  
+  Example mutation:
+  ```
+  mutation {
+    updateDelivery(id: 1, input: {
+      delivery_status: "on the way",
+      current_location: "On route"
+    }) {
+      id
+      delivery_status
+      current_location
+    }
+  }
+  ```
 
-- **deleteDelivery(id: ID!): Boolean**  
-  Delete a delivery record by ID.
+- deleteDelivery(id: ID!): Boolean  
+  Delete a delivery record by ID.  
+  Example mutation:
+  ```
+  mutation {
+    deleteDelivery(id: 1)
+  }
+  ```
 
 ## Input Types
 
-### DeliveryInput
-- **order_id**: Int!
-- **delivery_status**: String
-- **delivery_time**: String
-- **current_location**: String
+DeliveryInput:
+- order_id: Int!
+- delivery_status: String
+- delivery_time: String
+- current_location: String

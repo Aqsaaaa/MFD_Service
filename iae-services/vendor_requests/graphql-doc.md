@@ -1,41 +1,60 @@
 # Vendor Requests Service - GraphQL API Documentation
 
-## Types
-
-### VendorRequest
-- **id**: ID! - Unique identifier for the vendor request
-- **vendor_id**: Int! - Associated vendor ID
-- **ingredient_id**: Int! - Associated ingredient ID
-- **quantity**: Int! - Quantity requested
-- **status**: String! - Status of the request (requested, accepted, on-delivery, delivered)
-- **requested_at**: String - Timestamp when the request was made
-- **estimated_arrival**: String - Estimated arrival datetime
-
-## Queries
-
-- **getVendorRequest(id: ID!): VendorRequest**  
-  Retrieve a vendor request by its ID.
-
-- **getAllVendorRequests: [VendorRequest]**  
-  Retrieve all vendor requests.
-
 ## Mutations
 
-- **createVendorRequest(input: VendorRequestInput!): VendorRequest**  
-  Create a new vendor request record.
+- createVendorRequest(input: VendorRequestInput!): VendorRequest  
+  Create a new vendor request record.  
+  Example mutation:
+  ```
+  mutation {
+    createVendorRequest(input: {
+      vendor_id: 1,
+      ingredient_id: 2,
+      quantity: 100,
+      status: "requested",
+      requested_at: "2025-05-22T14:00:00Z",
+      estimated_arrival: "2025-05-25T14:00:00Z"
+    }) {
+      id
+      vendor_id
+      ingredient_id
+      quantity
+      status
+      requested_at
+      estimated_arrival
+    }
+  }
+  ```
 
-- **updateVendorRequest(id: ID!, input: VendorRequestInput!): VendorRequest**  
-  Update an existing vendor request record.
+- updateVendorRequest(id: ID!, input: VendorRequestInput!): VendorRequest  
+  Update an existing vendor request record.  
+  Example mutation:
+  ```
+  mutation {
+    updateVendorRequest(id: 1, input: {
+      status: "on-delivery"
+    }) {
+      id
+      status
+    }
+  }
+  ```
 
-- **deleteVendorRequest(id: ID!): Boolean**  
-  Delete a vendor request record by ID.
+- deleteVendorRequest(id: ID!): Boolean  
+  Delete a vendor request record by ID.  
+  Example mutation:
+  ```
+  mutation {
+    deleteVendorRequest(id: 1)
+  }
+  ```
 
 ## Input Types
 
-### VendorRequestInput
-- **vendor_id**: Int!
-- **ingredient_id**: Int!
-- **quantity**: Int!
-- **status**: String
-- **requested_at**: String
-- **estimated_arrival**: String
+VendorRequestInput:
+- vendor_id: Int!
+- ingredient_id: Int!
+- quantity: Int!
+- status: String
+- requested_at: String
+- estimated_arrival: String

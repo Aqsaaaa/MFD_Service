@@ -1,33 +1,48 @@
 # Vendors Service - GraphQL API Documentation
 
-## Types
-
-### Vendor
-- **id**: ID! - Unique identifier for the vendor
-- **name**: String! - Name of the vendor
-- **contact**: String - Contact information for the vendor
-
-## Queries
-
-- **getVendor(id: ID!): Vendor**  
-  Retrieve a vendor by its ID.
-
-- **getAllVendors: [Vendor]**  
-  Retrieve all vendors.
-
 ## Mutations
 
-- **createVendor(input: VendorInput!): Vendor**  
-  Create a new vendor record.
+- createVendor(input: VendorInput!): Vendor  
+  Create a new vendor record.  
+  Example mutation:
+  ```
+  mutation {
+    createVendor(input: {
+      name: "Vendor A",
+      contact: "contact@vendora.com"
+    }) {
+      id
+      name
+      contact
+    }
+  }
+  ```
 
-- **updateVendor(id: ID!, input: VendorInput!): Vendor**  
-  Update an existing vendor record.
+- updateVendor(id: ID!, input: VendorInput!): Vendor  
+  Update an existing vendor record.  
+  Example mutation:
+  ```
+  mutation {
+    updateVendor(id: 1, input: {
+      contact: "newcontact@vendora.com"
+    }) {
+      id
+      contact
+    }
+  }
+  ```
 
-- **deleteVendor(id: ID!): Boolean**  
-  Delete a vendor record by ID.
+- deleteVendor(id: ID!): Boolean  
+  Delete a vendor record by ID.  
+  Example mutation:
+  ```
+  mutation {
+    deleteVendor(id: 1)
+  }
+  ```
 
 ## Input Types
 
-### VendorInput
-- **name**: String!
-- **contact**: String
+VendorInput:
+- name: String!
+- contact: String

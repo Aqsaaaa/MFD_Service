@@ -1,35 +1,51 @@
 # Menu Ingredients Service - GraphQL API Documentation
 
-## Types
-
-### MenuIngredient
-- **id**: ID! - Unique identifier for the menu ingredient
-- **menu_id**: Int! - Associated menu ID
-- **ingredient_id**: Int! - Associated ingredient ID
-- **quantity**: Float! - Quantity of the ingredient used
-
-## Queries
-
-- **getMenuIngredient(id: ID!): MenuIngredient**  
-  Retrieve a menu ingredient by its ID.
-
-- **getAllMenuIngredients: [MenuIngredient]**  
-  Retrieve all menu ingredients.
-
 ## Mutations
 
-- **createMenuIngredient(input: MenuIngredientInput!): MenuIngredient**  
-  Create a new menu ingredient record.
+- createMenuIngredient(input: MenuIngredientInput!): MenuIngredient  
+  Create a new menu ingredient record.  
+  Example mutation:
+  ```
+  mutation {
+    createMenuIngredient(input: {
+      menu_id: 1,
+      ingredient_id: 2,
+      quantity: 3.5
+    }) {
+      id
+      menu_id
+      ingredient_id
+      quantity
+    }
+  }
+  ```
 
-- **updateMenuIngredient(id: ID!, input: MenuIngredientInput!): MenuIngredient**  
-  Update an existing menu ingredient record.
+- updateMenuIngredient(id: ID!, input: MenuIngredientInput!): MenuIngredient  
+  Update an existing menu ingredient record.  
+  Example mutation:
+  ```
+  mutation {
+    updateMenuIngredient(id: 1, input: {
+      quantity: 4.0
+    }) {
+      id
+      quantity
+    }
+  }
+  ```
 
-- **deleteMenuIngredient(id: ID!): Boolean**  
-  Delete a menu ingredient record by ID.
+- deleteMenuIngredient(id: ID!): Boolean  
+  Delete a menu ingredient record by ID.  
+  Example mutation:
+  ```
+  mutation {
+    deleteMenuIngredient(id: 1)
+  }
+  ```
 
 ## Input Types
 
-### MenuIngredientInput
-- **menu_id**: Int!
-- **ingredient_id**: Int!
-- **quantity**: Float!
+MenuIngredientInput:
+- menu_id: Int!
+- ingredient_id: Int!
+- quantity: Float!
