@@ -1,9 +1,37 @@
 const db = require('./db');
+const fetch = require('node-fetch');
 
 const resolvers = {
   getDelivery: async ({ id }) => {
     const [rows] = await db.query('SELECT * FROM deliveries WHERE id = ?', [id]);
-    return rows[0];
+    if (rows.length === 0) return null;
+    const delivery = rows[0];
+    try {
+      const response = await fetch(`http://localhost:4008/graphql`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query: `
+            query GetOrder($id: ID!) {
+              getOrder(id: $id) {
+                id
+                user_id
+                status
+                payment_status
+                order_time
+              }
+            }
+          `,
+          variables: { id: delivery.order_id }
+        }),
+      });
+      const json = await response.json();
+      delivery.order = json.data.getOrder;
+    } catch (error) {
+      delivery.order = null;
+    }
+
+    return delivery;
   },
 
   getAllDeliveries: async () => {
