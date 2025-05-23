@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  deliveries:
+    build:
+      context: ./MFD
+      dockerfile: deliveries/Dockerfile
+    ports:
+      - "4001:4001"
+
+  memberships:
+    build:
+      context: ./MFD
+      dockerfile: memberships/Dockerfile
+    ports:
+      - "4002:4002"
+
+  vendor_requests:
+    build:
+      context: ./MFD
+      dockerfile: vendor_requests/Dockerfile
+    ports:
+      - "4003:4003"
+
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: iae_user
+      MYSQL_PASSWORD: iae_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: rootpassword
+    depends_on:
+      - mysql
+
+volumes:
+  mysql-data:

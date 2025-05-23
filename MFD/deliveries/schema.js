@@ -13,7 +13,6 @@ const schema = buildSchema(`
     delivery_status: DeliveryStatus!
     delivery_time: String
     current_location: String
-    order: Order
   }
 
   input DeliveryInput {
