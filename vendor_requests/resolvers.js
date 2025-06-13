@@ -39,7 +39,7 @@ const resolvers = {
     const { vendor_id, ingredient_id, quantity, status = 'requested', requested_at = null, estimated_arrival = null } = input;
     const [result] = await db.query(
       'INSERT INTO vendor_requests (vendor_id, ingredient_id, quantity, status, requested_at, estimated_arrival) VALUES (?, ?, ?, ?, ?, ?)',
-      [vendor_id, ingredient_id, quantity, status, requested_at, estimated_arrival]
+      [vendor_id, ingredient_id, quantity, 'requested', requested_at || Date.now(), estimated_arrival || new Date(Date.now() + 5 * 60 * 60 * 1000)]
     );
     const [rows] = await db.query('SELECT * FROM vendor_requests WHERE id = ?', [result.insertId]);
     return rows[0];
