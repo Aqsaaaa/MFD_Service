@@ -1,10 +1,10 @@
 const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool({
-  host: 'mysql',
+  host: 'deliveries-db',
   user: 'root',
   password: 'root',
-  database: 'deliveries_services',
+  database: 'deliveries_db',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0

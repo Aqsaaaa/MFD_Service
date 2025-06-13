@@ -1,10 +1,10 @@
 const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool({
-  host: 'mysql',
+  host: 'vendor_requests-db',
   user: 'root',
   password: 'root',
-  database: 'vendor_requests_services',
+  database: 'vendor_requests_db',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
