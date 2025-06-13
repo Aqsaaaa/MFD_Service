@@ -1,5 +1,35 @@
 # Memberships Service - GraphQL API Documentation
 
+# GET BY ID
+query getMembership($id : ID!){
+  getMembership(id:$id) {
+    id
+    user_id
+    points
+    user{
+      name
+    }
+  }  
+}
+# VARIABEL
+{
+  "id" : 1
+}
+
+# GET ALL MEMBER
+{
+  getAllMemberships {
+    id
+    user {
+      name
+      id
+      phone
+      
+    }
+  }
+}
+
+
 ## Mutations
 
 - createMembership(input: MembershipInput!): Membership  

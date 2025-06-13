@@ -1,10 +1,17 @@
 const { buildSchema } = require('graphql');
 
 const schema = buildSchema(`
+  type User {
+    id: ID!
+    name: String
+    phone: String
+  }
+
   type Membership {
     id: ID!
     user_id: Int!
     points: Int
+    user: User
   }
 
   input MembershipInput {
